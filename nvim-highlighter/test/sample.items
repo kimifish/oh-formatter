@@ -1,0 +1,31 @@
+Group LivingRoom "Living room" <sofa> ["Location", "Room"] {
+    ai="room" [ aliases="living room,зал", readable=true ]
+}
+
+Group Music (LivingRoom) ["Equipment", "AudioVisual"] {
+    ai="equipment" [ aliases="music,музыка", readable=true, writable=false ]
+}
+
+Player Music_Player "Player" <player> (Music) ["Control", "MediaControl"] {
+    channel = "mqtt:topic:mosquitto:music:control",
+    ai="state" [ aliases="player", readable=true, writable=true, safety="safe-write", role="primary-control" ]
+}
+
+DateTime Sunset_Time "Sunset" (LivingRoom) ["Status", "Timestamp", "CustomTag"] {
+    ai="state" [ aliases="sunset", readable=true, writable=false, safety="read-only", role="status" ],
+    report="weather" [ priority=20, normal_states="OFF,CLOSED", problem_states="ON,OPEN" ],
+    semantics="Point_Status" [ relatesTo="Property_Timestamp", isPointOf="Sun" ]
+}
+
+Dimmer Music_Volume "Volume [%d %%]" <soundvolume> (Music) ["Control", "SoundVolume"] {
+    channel = "mqtt:topic:mosquitto:music:volume"
+}
+
+Number:Temperature LivingRoom_Temperature "Temperature [%.1f %unit%]" <temperature> (LivingRoom) ["Measurement", "Temperature"] {
+    unit="°C",
+    channel="mqtt:topic:mosquitto:livingroom:temperature"
+}
+
+Switch Music_Mute "Mute" (Music) { channel = "mqtt:topic:mosquitto:music:muted" }
+
+// vim: set ft=openhab_items:

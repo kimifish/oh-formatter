@@ -1,0 +1,11 @@
+// Public synthetic fixture: Number dimensions and QuantityType metadata.
+Group Weather "Weather" <weather> ["WeatherService"] {
+    ai="equipment" [ aliases="weather,forecast", readable=true, writable=false ]
+}
+
+Number:Temperature Outdoor_Temperature "Temperature [%.1f %unit%]" <temperature> (Weather) ["Measurement", "Temperature"] {
+    unit="°C", channel="mqtt:topic:demo:weather:temperature",
+    ai="state" [ aliases="temperature,outdoor temperature", readable=true, writable=false, safety="read-only" ]
+}
+Number:Pressure Outdoor_Pressure "Pressure [%.1f %unit%]" <pressure> (Weather) ["Measurement", "Pressure"] { unit="hPa", channel="mqtt:topic:demo:weather:pressure" }
+Number:Speed Wind_Speed "Wind [%.1f km/h]" <wind> (Weather) ["Measurement", "Wind"] { unit="m/s", channel="mqtt:topic:demo:weather:wind_speed" }

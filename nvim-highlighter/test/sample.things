@@ -1,0 +1,23 @@
+Bridge mqtt:broker:mosquitto "Mosquitto" [ host="127.0.0.1", secure=false ] {
+    Thing topic music "Music topic" {
+        Channels:
+            Type player : control "Control" [
+                stateTopic="openhab/music/state",
+                commandTopic="openhab/music/command"
+            ]
+            Type dimmer : volume "Volume" [
+                stateTopic="openhab/music/volume",
+                commandTopic="openhab/music/volume/set",
+                min=0,
+                max=100
+            ]
+            Type switch : muted "Muted" [
+                stateTopic="openhab/music/muted",
+                commandTopic="openhab/music/muted/set",
+                transformationPattern="REGEX:(.*state_right.*)∩JSONPATH:$.state_right",
+                transformationPatternOut="JSON:$.value",
+                on="true",
+                off="false"
+            ]
+    }
+}

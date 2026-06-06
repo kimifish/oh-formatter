@@ -1,0 +1,16 @@
+import java.time.LocalTime
+
+val quietHour = LocalTime.of(23, 0)
+
+rule "Mute music late at night"
+when
+    Item Music_Player received command or
+    Time cron "0 0/5 * * * ?"
+then
+    if (now.toLocalTime().isAfter(quietHour) && Music_Mute.state != ON) {
+        logInfo("music", "Enabling mute")
+        Music_Mute.sendCommand(ON)
+    } else {
+        logDebug("music", "No mute change needed")
+    }
+end

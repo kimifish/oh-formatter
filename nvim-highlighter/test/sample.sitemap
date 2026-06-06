@@ -1,0 +1,8 @@
+sitemap demo label="openHAB demo" {
+    Frame label="Music" icon="soundvolume" {
+        Text item=Music_Player label="Player [%s]"
+        Slider item=Music_Volume label="Volume [%d %%]"
+        Switch item=Music_Mute mappings=[ON="Mute", OFF="Unmute"]
+        Chart item=Music_Volume period=D refresh=60000
+    }
+}

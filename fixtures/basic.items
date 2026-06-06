@@ -1,0 +1,8 @@
+// Public synthetic fixture: basic item shapes.
+Group Home "Demo Home" <house> ["Building"] {
+    ai="equipment" [ aliases="home,demo home", readable=true, writable=false ]
+}
+
+Switch Demo_Light "Demo light [%s]" <light> (Home) ["Switch", "Light"] { channel="mqtt:topic:demo:light:switch" }
+Dimmer Demo_Dimmer "Demo dimmer [%d %%]" <slider> (Home) ["Control", "Light"] { channel="mqtt:topic:demo:light:dimmer" }
+String Demo_Status "Status [%s]" (Home) { expire="5m,command=OFF" }

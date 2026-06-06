@@ -1,0 +1,9 @@
+// Public synthetic fixture: metadata blocks and comments.
+Group:Switch:OR(ON, OFF) Demo_Alarm "Demo alarm" <shield> (Home) {
+    ai="equipment" [ aliases="alarm,security", readable=true, writable=false ]
+} // ["AlarmSystem"]
+
+String Demo_Report "Diagnostics" /*["Status", "Info"]*/ {
+    ai="state" [ aliases="diagnostics,report", readable=true, writable=false, safety="read-only" ],
+    report="diagnostics" [ priority=35, context=true ]
+}
