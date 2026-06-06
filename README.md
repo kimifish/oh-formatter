@@ -4,6 +4,8 @@ Formatter and Neovim syntax support for openHAB text configuration files.
 
 The project currently implements a formatter for `.items` files and ships Vim/Neovim syntax files for `.items`, `.things`, `.sitemap`, and `.rules`.
 
+![Formatted openHAB items in Neovim](assets/screenshot.png)
+
 ## Features
 
 - CLI command: `openhab-items-format`.
